@@ -1,55 +1,222 @@
+
+# Create a single HTML file named index.html that includes all HTML, CSS, and JavaScript inline for the fitness trainer website
+
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Trainer Empire</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitness Trainer Empire</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+    }
+
+    header {
+        background: #333;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    header nav ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    header nav ul li {
+        display: inline;
+        margin: 0 10px;
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    .plans, .testimonials {
+        display: flex;
+        gap: 20px;
+    }
+
+    .plan, .testimonial {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        flex: 1;
+    }
+
+    footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+    }
+  </style>
+  <meta name="description" content="Professional fitness training services. Get personalized workout plans, BMI/BMR calculators, and client testimonials." />
+  <meta name="keywords" content="fitness, trainer, workout, BMI, BMR, testimonials, plans" />
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#calculators">Calculators</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#calculators">Calculators</a></li>
+        <li><a href="#plans">Workout Plans</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <section id="home">
-        <video autoplay muted loop id="hero-video">
-            <source src="media/hero-video.mp4" type="video/mp4">
-        </video>
-        <h1>Welcome to Fitness Trainer Empire</h1>
-        <p>Your journey to a healthier life starts here.</p>
-    </section>
+  <section id="home">
+    <video autoplay muted loop id="hero-video">
+      <source src="media/hero-video.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-content">
+      <h1>Welcome to Fitness Trainer Empire</h1>
+      <p>Your journey to a healthier life starts here.</p>
+    </div>
+  </section>
 
-    <section id="calculators">
-        <h2>Fitness Calculators</h2>
-        <div id="bmi-calculator">
-            <h3>BMI Calculator</h3>
-            <!-- BMI Calculator form -->
-        </div>
-        <div id="bmr-calculator">
-            <h3>BMR Calculator</h3>
-            <!-- BMR Calculator form -->
-        </div>
-    </section>
+  <section id="calculators">
+    <h2>Fitness Calculators</h2>
+    <div id="bmi-calculator">
+      <h3>BMI Calculator</h3>
+      <form>
+        <label for="bmi-weight">Weight (kg):</label>
+        <input type="number" id="bmi-weight" />
+        <label for="bmi-height">Height (cm):</label>
+        <input type="number" id="bmi-height" />
+        <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+      </form>
+      <p id="bmi-result"></p>
+    </div>
+    <div id="bmr-calculator">
+      <h3>BMR Calculator</h3>
+      <form>
+        <label for="bmr-weight">Weight (kg):</label>
+        <input type="number" id="bmr-weight" />
+        <label for="bmr-height">Height (cm):</label>
+        <input type="number" id="bmr-height" />
+        <label for="bmr-age">Age:</label>
+        <input type="number" id="bmr-age" />
+        <label for="bmr-gender">Gender:</label>
+        <select id="bmr-gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <button type="button" onclick="calculateBMR()">Calculate BMR</button>
+      </form>
+      <p id="bmr-result"></p>
+    </div>
+  </section>
 
-    <section id="gallery">
-        <h2>Before & After Gallery</h2>
-        <div class="gallery">
-            <img src="media/before1.jpg" alt="Before">
-            <img src="media/after1.jpg" alt="After">
-        </div>
-    </section>
+  <section id="plans">
+    <h2>Workout Plans</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Beginner Plan</h3>
+        <p>Get started with our beginner-friendly workout plan.</p>
+      </div>
+      <div class="plan">
+        <h3>Intermediate Plan</h3>
+        <p>Take your fitness to the next level with our intermediate plan.</p>
+      </div>
+      <div class="plan">
+        <h3>Advanced Plan</h3>
+        <p>Challenge yourself with our advanced workout plan.</p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2023 Fitness Trainer Empire. All rights reserved.</p>
-    </footer>
+  <section id="testimonials">
+    <h2>Client Testimonials</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"I've never felt better! The personalized workout plans are amazing." - John D.</p>
+      </div>
+      <div class="testimonial">
+        <p>"The BMI and BMR calculators helped me understand my fitness level." - Sarah K.</p>
+      </div>
+      <div class="testimonial">
+        <p>"Highly recommend Fitness Trainer Empire for anyone looking to get fit." - Mike L.</p>
+      </div>
+    </div>
+  </section>
 
-    <script src="scripts.js"></script>
+  <footer>
+    <p>&copy; 2023 Fitness Trainer Empire. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function calculateBMI() {
+      const weight = document.getElementById('bmi-weight').value;
+      const height = document.getElementById('bmi-height').value;
+      if (weight && height) {
+        const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+        document.getElementById('bmi-result').innerText = `Your BMI is ${bmi}`;
+      } else {
+        document.getElementById('bmi-result').innerText = 'Please enter both weight and height';
+      }
+    }
+
+    function calculateBMR() {
+      const weight = document.getElementById('bmr-weight').value;
+      const height = document.getElementById('bmr-height').value;
+      const age = document.getElementById('bmr-age').value;
+      const gender = document.getElementById('bmr-gender').value;
+      let bmr;
+      if (weight && height && age && gender) {
+        if (gender === 'male') {
+          bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+        } else {
+          bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+        }
+        document.getElementById('bmr-result').innerText = `Your BMR is ${bmr.toFixed(2)} calories/day`;
+      } else {
+        document.getElementById('bmr-result').innerText = 'Please enter all fields';
+      }
+    }
+  </script>
 </body>
 </html>
+"""
+
+# Write the content to index.html
+with open("index.html", "w") as file:
+    file.write(html_content)
+
+print("The file 'index.html' has been created successfully.")
+
