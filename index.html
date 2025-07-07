@@ -1,222 +1,116 @@
-
-# Create a single HTML file named index.html that includes all HTML, CSS, and JavaScript inline for the fitness trainer website
-
-html_content = """
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fitness Trainer Empire</title>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DANNY FIT | מאמן כושר אישי</title>
+  <meta name="description" content="דני פיט - מאמן כושר אישי מקצועי עם 12 שנות ניסיון. אימונים אישיים, קבוצתיים ותוכניות כושר מותאמות אישית. תוצאות מובטחות!">
 
-    .hero {
-        position: relative;
-        height: 100vh;
-        overflow: hidden;
-    }
+  <style>
+    /* Base Variables */
+    :root {
+      --primary-red: #dc2626;
+      --accent-orange: #ea580c;
+      --text-dark: #111827;
+      --text-light: #6b7280;
+      --bg-white: #ffffff;
+      --bg-dark: #1f2937;
+      --shadow-soft: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Assistant', sans-serif; line-height:1.6; color:var(--text-dark); background:var(--bg-white); }
+    img { max-width:100%; display:block; }
+    a { text-decoration:none; }
 
-    #hero-video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+    /* Header */
+    .header { position:fixed; top:0; width:100%; background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); z-index:1000; box-shadow:var(--shadow-soft); }
+    .nav { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1rem; }
+    .logo { font-family:'Heebo',sans-serif; font-size:2rem; font-weight:900; color:var(--primary-red); }
+    .nav-links { list-style:none; display:flex; gap:1.5rem; }
+    .nav-links a { color:var(--text-dark); font-weight:600; position:relative; }
+    .nav-links a:hover::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2px; background:var(--primary-red); }
 
-    .hero-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: white;
-    }
+    /* Hero */
+    .hero { background:url('https://source.unsplash.com/1600x900/?gym') center/cover no-repeat; position:relative; padding:8rem 1rem 4rem; text-align:center; color:white; }
+    .hero::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+    .hero-content { position:relative; z-index:1; max-width:800px; margin:0 auto; }
+    .hero h1 { font-family:'Heebo',sans-serif; font-size:3.5rem; margin-bottom:1rem; }
+    .hero .subtitle { font-size:1.2rem; margin-bottom:2rem; }
+    .btn { display:inline-block; padding:0.75rem 2rem; border:none; border-radius:25px; font-weight:700; cursor:pointer; text-transform:uppercase; margin:0.5rem; }
+    .btn-primary { background:var(--accent-orange); color:white; }
+    .btn-secondary { background:transparent; color:white; border:2px solid white; }
 
-    header {
-        background: #333;
-        color: white;
-        padding: 10px 0;
-        text-align: center;
-    }
+    /* Sections */
+    section { padding:4rem 1rem; }
+    .container { max-width:1200px; margin:0 auto; }
+    .section-title { text-align:center; font-family:'Heebo',sans-serif; font-size:2.5rem; margin-bottom:2rem; position:relative; }
+    .section-title::after { content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:60px; height:4px; background:var(--accent-orange); border-radius:2px; }
 
-    header nav ul {
-        list-style: none;
-        padding: 0;
-    }
+    /* Services */
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+    .service-card { background:var(--bg-white); padding:2rem; border-radius:12px; box-shadow:var(--shadow-soft); text-align:center; }
+    .service-card img { border-radius:8px; margin-bottom:1rem; }
+    .service-card h3 { margin-bottom:1rem; font-family:'Heebo',sans-serif; }
+    .service-card p { color:var(--text-light); margin-bottom:1rem; }
 
-    header nav ul li {
-        display: inline;
-        margin: 0 10px;
-    }
-
-    header nav ul li a {
-        color: white;
-        text-decoration: none;
-    }
-
-    section {
-        padding: 20px;
-    }
-
-    .plans, .testimonials {
-        display: flex;
-        gap: 20px;
-    }
-
-    .plan, .testimonial {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        flex: 1;
-    }
-
-    footer {
-        background: #333;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-    }
-  </style>
-  <meta name="description" content="Professional fitness training services. Get personalized workout plans, BMI/BMR calculators, and client testimonials." />
-  <meta name="keywords" content="fitness, trainer, workout, BMI, BMR, testimonials, plans" />
+    /* Footer */
+    .footer { background:var(--bg-dark); color:white; padding:2rem 1rem; text-align:center; }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#calculators">Calculators</a></li>
-        <li><a href="#plans">Workout Plans</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">DANNY FIT</div>
+      <ul class="nav-links">
+        <li><a href="#home">בית</a></li>
+        <li><a href="#services">שירותים</a></li>
+        <li><a href="#contact">צור קשר</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <section id="home">
-    <video autoplay muted loop id="hero-video">
-      <source src="media/hero-video.mp4" type="video/mp4" />
-    </video>
-    <div class="hero-content">
-      <h1>Welcome to Fitness Trainer Empire</h1>
-      <p>Your journey to a healthier life starts here.</p>
-    </div>
-  </section>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>DANNY FIT 💪</h1>
+      <p class="subtitle">מאמן כושר אישי מקצועי - הדרך שלך לגוף חזק ובריא</p>
+      <a href="#services" class="btn btn-primary">צפו בשירותים</a>
+      <a href="#contact" class="btn btn-secondary">צור קשר</a>
+    </div>
+  </section>
 
-  <section id="calculators">
-    <h2>Fitness Calculators</h2>
-    <div id="bmi-calculator">
-      <h3>BMI Calculator</h3>
-      <form>
-        <label for="bmi-weight">Weight (kg):</label>
-        <input type="number" id="bmi-weight" />
-        <label for="bmi-height">Height (cm):</label>
-        <input type="number" id="bmi-height" />
-        <button type="button" onclick="calculateBMI()">Calculate BMI</button>
-      </form>
-      <p id="bmi-result"></p>
-    </div>
-    <div id="bmr-calculator">
-      <h3>BMR Calculator</h3>
-      <form>
-        <label for="bmr-weight">Weight (kg):</label>
-        <input type="number" id="bmr-weight" />
-        <label for="bmr-height">Height (cm):</label>
-        <input type="number" id="bmr-height" />
-        <label for="bmr-age">Age:</label>
-        <input type="number" id="bmr-age" />
-        <label for="bmr-gender">Gender:</label>
-        <select id="bmr-gender">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        <button type="button" onclick="calculateBMR()">Calculate BMR</button>
-      </form>
-      <p id="bmr-result"></p>
-    </div>
-  </section>
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">שירותי אימון</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="https://source.unsplash.com/400x300/?personal-training" alt="אימון אישי">
+          <h3>אימון אישי</h3>
+          <p>תוכנית מותאמת אישית איתי, למעקב צמוד ותוצאות מהירות.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://source.unsplash.com/400x300/?group-workout" alt="אימון קבוצתי">
+          <h3>אימון קבוצתי</h3>
+          <p>אווירה מפעילה ותומכת בקבוצות קטנות.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://source.unsplash.com/400x300/?online-training" alt="אימון אונליין">
+          <h3>אימון אונליין</h3>
+          <p>ליווי דיגיטלי מלא ותוכנית מותאמת למרחק.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <section id="plans">
-    <h2>Workout Plans</h2>
-    <div class="plans">
-      <div class="plan">
-        <h3>Beginner Plan</h3>
-        <p>Get started with our beginner-friendly workout plan.</p>
-      </div>
-      <div class="plan">
-        <h3>Intermediate Plan</h3>
-        <p>Take your fitness to the next level with our intermediate plan.</p>
-      </div>
-      <div class="plan">
-        <h3>Advanced Plan</h3>
-        <p>Challenge yourself with our advanced workout plan.</p>
-      </div>
-    </div>
-  </section>
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">צרו קשר</h2>
+      <p style="text-align:center;">מלאו את הטופס ונחזור אליכם בהקדם</p>
+      <!-- אפשר להוסיף טופס כאן -->
+    </div>
+  </section>
 
-  <section id="testimonials">
-    <h2>Client Testimonials</h2>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p>"I've never felt better! The personalized workout plans are amazing." - John D.</p>
-      </div>
-      <div class="testimonial">
-        <p>"The BMI and BMR calculators helped me understand my fitness level." - Sarah K.</p>
-      </div>
-      <div class="testimonial">
-        <p>"Highly recommend Fitness Trainer Empire for anyone looking to get fit." - Mike L.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2023 Fitness Trainer Empire. All rights reserved.</p>
-  </footer>
-
-  <script>
-    function calculateBMI() {
-      const weight = document.getElementById('bmi-weight').value;
-      const height = document.getElementById('bmi-height').value;
-      if (weight && height) {
-        const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
-        document.getElementById('bmi-result').innerText = `Your BMI is ${bmi}`;
-      } else {
-        document.getElementById('bmi-result').innerText = 'Please enter both weight and height';
-      }
-    }
-
-    function calculateBMR() {
-      const weight = document.getElementById('bmr-weight').value;
-      const height = document.getElementById('bmr-height').value;
-      const age = document.getElementById('bmr-age').value;
-      const gender = document.getElementById('bmr-gender').value;
-      let bmr;
-      if (weight && height && age && gender) {
-        if (gender === 'male') {
-          bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-        } else {
-          bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
-        }
-        document.getElementById('bmr-result').innerText = `Your BMR is ${bmr.toFixed(2)} calories/day`;
-      } else {
-        document.getElementById('bmr-result').innerText = 'Please enter all fields';
-      }
-    }
-  </script>
+  <footer class="footer">
+    <p>&copy; 2025 DANNY FIT. כל הזכויות שמורות.</p>
+  </footer>
 </body>
 </html>
-"""
-
-# Write the content to index.html
-with open("index.html", "w") as file:
-    file.write(html_content)
-
-print("The file 'index.html' has been created successfully.")
-
